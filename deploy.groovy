@@ -1,37 +1,26 @@
 pipeline {
   agent any
-  
+
   stages {
     stage('Clone Repository') {
       steps {
-        //git 'https://github.com/alwalidddd/your-repo.git'
-        git 'https://github.com/alwalidddd/testingwalid'
+        git 'https://github.com/your-username/your-repo.git'
       }
     }
-    
+
     stage('Build Docker Image') {
       steps {
-        script {
-          docker.withRegistry('https://your-docker-registry', 'docker-credentials-id') {
-            def customImage = docker.build('nginx')
-            customImage.push()
-          }
-        }
+        sh 'docker build -t your-image-name .'
       }
     }
-    
+
     stage('Deploy to Docker') {
       steps {
-        script {
-          docker.withRegistry('https://your-docker-registry', 'docker-credentials-id') {
-            def container = docker.image('nginx').run('-p 80:80 -d')
-            // Additional deployment steps (e.g., environment setup) can be added here
-          }
-        }
+        sh 'docker run -p 8080:8080 -d your-image-name'
       }
     }
   }
-  
+
   post {
     success {
       echo 'Deployment successful!'
