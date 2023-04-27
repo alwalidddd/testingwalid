@@ -16,7 +16,7 @@ pipeline {
 
     stage('Deploy to Docker') {
       steps {
-        sh 'docker run -p 8080:8080 -d {your-image-name}'
+        sh 'docker run -p 80:80 -d {your-image-name}'
       }
     }
   }
