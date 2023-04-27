@@ -13,7 +13,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://your-docker-registry', 'docker-credentials-id') {
-            def customImage = docker.build('your-image-name')
+            def customImage = docker.build('nginx')
             customImage.push()
           }
         }
